@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+// export const prerender = false;
 
 import Layout from "../../layouts/Layout.astro";
 ---
@@ -14,6 +14,8 @@ import Layout from "../../layouts/Layout.astro";
     <input type="email" name="email" id="email" />
     <label for="password">Password</label>
     <input type="password" name="password" id="password" />
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" name="confirmPassword" id="confirmPassword" />
     <button type="submit">Create my account</button>
   </form>
 </Layout>
