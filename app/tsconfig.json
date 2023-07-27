@@ -8,8 +8,11 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist/server",
     "baseUrl": "./",
+    "paths": {
+      "@*": ["./src/"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
