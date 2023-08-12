@@ -13,7 +13,9 @@
     "paths": {
       "@pkg/logger": ["src/pkg/logger"],
       "@pkg/config": ["src/pkg/config"],
-      "@common": ["src/common"]
+      "@common/http": ["src/common/http"],
+      "@common/interfaces": ["src/common/interfaces"],
+      "@common/dtos": ["src/common/dtos"]
     },
     "incremental": true,
     "skipLibCheck": true,

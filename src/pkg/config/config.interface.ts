@@ -22,8 +22,8 @@ export interface CloudinaryConfig {
   secret_key: string;
 }
 
-export interface RedisConfig extends IGenericService {}
-export interface DatabaseConfig extends IGenericService {}
+export type RedisConfig = IGenericService;
+export type DatabaseConfig = IGenericService;
 
 export interface GoogleConfig extends IOuathConfig {
   oauth_google_client_id: string;

@@ -11,6 +11,10 @@ import { config } from 'dotenv';
 // auto load envs into config service
 config();
 
+/**
+ * Provides an adaptable environment configuration extension
+ */
+
 @Injectable()
 export class ConfigService {
   private config: ConfigData;
@@ -24,15 +28,21 @@ export class ConfigService {
 
   private parseConfigFromEnv(env: NodeJS.ProcessEnv): ConfigData {
     return {
-      environment: this.parseNodeEnvironmentConfig(env, DEFAULT_CONFIG.environment),
+      environment: this.parseNodeEnvironmentConfig(
+        env,
+        DEFAULT_CONFIG.environment,
+      ),
       services: this.parseServicesConfig(env, DEFAULT_CONFIG.services),
-      authentication: this.parseAuthenticationConfig(env, DEFAULT_CONFIG.authentication),
+      authentication: this.parseAuthenticationConfig(
+        env,
+        DEFAULT_CONFIG.authentication,
+      ),
     };
-  }    
+  }
 
   private parseNodeEnvironmentConfig(
-    env: NodeJS.ProcessEnv, 
-    defaultConfig: Readonly<NodeEnvironmentConfig>
+    env: NodeJS.ProcessEnv,
+    defaultConfig: Readonly<NodeEnvironmentConfig>,
   ): NodeEnvironmentConfig {
     return {
       type: env.NODE_ENV! || defaultConfig.type,
@@ -64,14 +74,15 @@ export class ConfigService {
       cloudinary: {
         name: env.CLOUDINARY_CLOUD_NAME! || defaultConfig.cloudinary.name,
         api_key: env.CLOUDINARY_API_KEY! || defaultConfig.cloudinary.api_key,
-        secret_key: env.CLOUDINARY_SECRET_KEY! || defaultConfig.cloudinary.secret_key,
+        secret_key:
+          env.CLOUDINARY_SECRET_KEY! || defaultConfig.cloudinary.secret_key,
       },
-    } 
+    };
   }
 
   private parseAuthenticationConfig(
     env: NodeJS.ProcessEnv,
-    defaultConfig:  Readonly<AuthConfig>,
+    defaultConfig: Readonly<AuthConfig>,
   ): AuthConfig {
     return {
       expiresIn: Number(env.TOKEN_EXPIRY),
@@ -87,7 +98,7 @@ export class ConfigService {
         oauth_callback: env.OAUTH_GITHUB_REDIRECT_URL!,
         oauth_github_secret: env.OAUTH_GITHUB_SECRET!,
       },
-    }
+    };
   }
 
   public get(): Readonly<ConfigData> {

@@ -4,10 +4,10 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ConfigService } from '@modules/config';
-import { Logger } from '@modules/logger';
+import { ConfigService } from '@pkg/config';
+import { Logger } from '@pkg/logger';
 import { Like, Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import * as argon2 from 'argon2';
 import {
   fieldsToUpdateDto,
   FindUserDto,
@@ -95,7 +95,7 @@ export class UserService {
   }
 
   hashData(token: string) {
-    return bcrypt.hash(token, 10);
+    return argon2.hash(token, { saltLength: 10 });
   }
 
   async updateRefreshTokenByEmail(email: string, refToken: string) {
@@ -202,6 +202,6 @@ export class UserService {
   }
 
   async hashPassword(password: string) {
-    return await bcrypt.hash(password, 10);
+    return await argon2.hash(password, { saltLength: 10 });
   }
 }

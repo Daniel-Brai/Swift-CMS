@@ -1,1 +1,1 @@
-export * from "./sendinblue/index";
+export * from './sendinblue/index';

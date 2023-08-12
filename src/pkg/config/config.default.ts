@@ -4,7 +4,7 @@ export const DEFAULT_CONFIG: ConfigData = {
   environment: {
     port: Number(process.env.PORT || 8000),
     type: 'production',
-  }, 
+  },
   services: {
     database: {
       host: '',
@@ -27,7 +27,7 @@ export const DEFAULT_CONFIG: ConfigData = {
       api_key: '',
       secret_key: '',
     },
-  }, 
+  },
   authentication: {
     expiresIn: 30000,
     access_token_secret: '',

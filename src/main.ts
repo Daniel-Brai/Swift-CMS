@@ -3,9 +3,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@pkg/config';
 import { Logger } from '@pkg/logger';
-import { HttpExceptionFilter } from '@common/http/exceptions';
+import { HttpExceptionFilter } from '@common/http';
 import { AppModule } from './app.module';
-import { join } from 'path';
 import * as express from 'express';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
@@ -16,7 +15,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const logger = app.get(Logger);
 
-  const PORT = Number(configService.get().port);
+  const PORT = configService.get().environment.port;
 
   app.enableCors({
     origin: [`http://localhost:${PORT}`, `http://127.0.0.1:${PORT}`],
@@ -33,10 +32,6 @@ async function bootstrap() {
       },
     }),
   );
-
-  app.useStaticAssets(join(__dirname, '../client/public/assets'));
-  app.setBaseViewsDir(join(__dirname, '../client/views'));
-  app.setViewEngine('ejs');
 
   app.use(compression());
   app.use(cookieParser());

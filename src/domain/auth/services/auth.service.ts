@@ -6,10 +6,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@modules/config';
+import { ConfigService } from '@pkg/config';
 import { UserService } from '../../user/services/user.service';
 import { UserSignInDto } from '../dto/auth-request.dto';
-import * as bcrypt from 'bcrypt';
+import * as argon2 from 'argon2';
 import { JwtPayload } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from '../../user/entity/user.entity';
@@ -119,11 +119,11 @@ export class AuthService {
 
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(data, {
-        secret: this.configService.get().auth.access_token_secret,
+        secret: this.configService.get().authentication.access_token_secret,
         expiresIn: '1d',
       }),
       this.jwtService.signAsync(data, {
-        secret: this.configService.get().auth.refresh_token_secret,
+        secret: this.configService.get().authentication.refresh_token_secret,
         expiresIn: '1d',
       }),
     ]);
@@ -144,6 +144,6 @@ export class AuthService {
   }
 
   private async comparePassword(enteredPassword: string, dbPassword: string) {
-    return await bcrypt.compare(enteredPassword, dbPassword);
+    return await argon2.verify(dbPassword, enteredPassword);
   }
 }
