@@ -13,6 +13,7 @@ export const DEFAULT_CONFIG: ConfigData = {
       password: '',
       name: '',
       url: '',
+      logging: true,
     },
     redis: {
       host: '',

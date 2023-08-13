@@ -62,6 +62,7 @@ export class ConfigService {
         password: env.DATABASE_PASSWORD! || defaultConfig.database.password,
         name: env.DATABASE_NAME! || defaultConfig.database.name,
         url: env.DATABASE_URL! || defaultConfig.database.url,
+        logging: Boolean(env.DATABASE_LOGGING!) || defaultConfig.database.logging,
       },
       redis: {
         host: env.REDIS_HOST! || defaultConfig.redis.host,

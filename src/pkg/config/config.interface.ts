@@ -23,7 +23,7 @@ export interface CloudinaryConfig {
 }
 
 export type RedisConfig = IGenericService;
-export type DatabaseConfig = IGenericService;
+export type DatabaseConfig = IGenericService & { logging: boolean };
 
 export interface GoogleConfig extends IOuathConfig {
   oauth_google_client_id: string;

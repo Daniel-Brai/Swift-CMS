@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { DatabaseConfig } from './database.interface';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService, ConfigDatabase } from '@modules/config';
+import { ConfigModule, ConfigService, DatabaseConfig as DbConfig } from '@pkg/config';
 
 @Module({})
 export class DatabaseModule {
@@ -9,7 +9,7 @@ export class DatabaseModule {
     config: ConfigService,
     dbConfig: DatabaseConfig,
   ): TypeOrmModuleOptions {
-    const dbData = config.get().database;
+    const dbData = config.get().services.database;
     if (!dbData) {
       throw Error('');
     }
@@ -18,12 +18,12 @@ export class DatabaseModule {
       ...connectionOptions,
       entities: dbConfig.entities,
       synchronize: true,
-      logging: true,
+      logging: dbData.logging,
     };
   }
 
   private static getConnectionOptionsPostgres(
-    dbData: ConfigDatabase,
+    dbData: DbConfig,
   ): TypeOrmModuleOptions {
     return {
       type: 'postgres',
