@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { PollEntity } from '../../polls/entity/poll.entity';
+import { BlogEntity } from '../../blog/entity/blog.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -37,11 +37,11 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 500, nullable: true })
   public profile_photo_url!: string;
 
-  @OneToMany(() => PollEntity, (poll: PollEntity) => poll.created_by, {
+  @OneToMany(() => BlogEntity, (b: BlogEntity) => b.creator, {
     cascade: true,
     eager: true,
   })
-  public polls!: PollEntity[];
+  public blogs!: BlogEntity[];
 
   @Column({ type: 'varchar', nullable: true })
   public permissions!: string;

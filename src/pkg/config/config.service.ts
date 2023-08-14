@@ -14,7 +14,6 @@ config();
 /**
  * Provides an adaptable environment configuration extension
  */
-
 @Injectable()
 export class ConfigService {
   private config: ConfigData;
@@ -62,7 +61,8 @@ export class ConfigService {
         password: env.DATABASE_PASSWORD! || defaultConfig.database.password,
         name: env.DATABASE_NAME! || defaultConfig.database.name,
         url: env.DATABASE_URL! || defaultConfig.database.url,
-        logging: Boolean(env.DATABASE_LOGGING!) || defaultConfig.database.logging,
+        logging:
+          Boolean(env.DATABASE_LOGGING!) || defaultConfig.database.logging,
       },
       redis: {
         host: env.REDIS_HOST! || defaultConfig.redis.host,
@@ -78,6 +78,19 @@ export class ConfigService {
         secret_key:
           env.CLOUDINARY_SECRET_KEY! || defaultConfig.cloudinary.secret_key,
       },
+      azure: {
+        blob: {
+          storage_container_name:
+            env.AZURE_STORAGE_CONTAINER_NAME! ||
+            defaultConfig.azure.blob.storage_container_name,
+          storage_account_name:
+            env.AZURE_STORAGE_ACCOUNT_NAME! ||
+            defaultConfig.azure.blob.storage_account_name,
+          storage_connection_string:
+            env.AZURE_STORAGE_CONNECTION_STRING! ||
+            defaultConfig.azure.blob.storage_connection_string,
+        },
+      },
     };
   }
 
@@ -86,18 +99,21 @@ export class ConfigService {
     defaultConfig: Readonly<AuthConfig>,
   ): AuthConfig {
     return {
-      expiresIn: Number(env.TOKEN_EXPIRY),
-      access_token_secret: env.JWT_ACCESS_TOKEN_SECRET!,
-      refresh_token_secret: env.JWT_REFRESH_TOKEN_SECRET!,
+      expiresIn: Number(env.TOKEN_EXPIRY!) || defaultConfig.expiresIn,
+      access_token_secret:
+        env.JWT_ACCESS_TOKEN_SECRET! || defaultConfig.access_token_secret,
+      refresh_token_secret:
+        env.JWT_REFRESH_TOKEN_SECRET! || defaultConfig.refresh_token_secret,
       google: {
-        oauth_google_client_id: env.OAUTH_GOOGLE_ID!,
+        oauth_google_client_id:
+          env.OAUTH_GOOGLE_ID! || defaultConfig.google.oauth_google_client_id,
         oauth_callback: env.OAUTH_GOOGLE_REDIRECT_URL!,
-        oauth_google_secret: env.OAUTH_GOOGLE_SECRET!,
+        oauth_google_secret_key: env.OAUTH_GOOGLE_SECRET!,
       },
       github: {
         oauth_github_client_id: env.OAUTH_GITHUB_ID!,
         oauth_callback: env.OAUTH_GITHUB_REDIRECT_URL!,
-        oauth_github_secret: env.OAUTH_GITHUB_SECRET!,
+        oauth_github_secret_key: env.OAUTH_GITHUB_SECRET!,
       },
     };
   }

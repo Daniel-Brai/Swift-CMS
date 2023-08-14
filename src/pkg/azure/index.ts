@@ -1,1 +1,1 @@
-export * from './blog-storage/storage.service';
+export * from './services/storage.service';

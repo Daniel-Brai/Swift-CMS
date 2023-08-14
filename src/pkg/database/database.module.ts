@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { DatabaseConfig } from './database.interface';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService, DatabaseConfig as DbConfig } from '@pkg/config';
+import {
+  ConfigModule,
+  ConfigService,
+  DatabaseConfig as DbConfig,
+} from '@pkg/config';
 
 @Module({})
 export class DatabaseModule {

@@ -28,6 +28,13 @@ export const DEFAULT_CONFIG: ConfigData = {
       api_key: '',
       secret_key: '',
     },
+    azure: {
+      blob: {
+        storage_container_name: '',
+        storage_account_name: '',
+        storage_connection_string: '',
+      },
+    },
   },
   authentication: {
     expiresIn: 30000,

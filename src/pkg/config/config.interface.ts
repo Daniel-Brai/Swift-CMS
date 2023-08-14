@@ -35,10 +35,19 @@ export interface GithubConfig extends IOuathConfig {
   oauth_github_secret_key: string;
 }
 
+export interface AzureConfig {
+  blob: {
+    storage_container_name: string;
+    storage_account_name: string;
+    storage_connection_string: string;
+  };
+}
+
 export interface ServicesConfig {
   database: DatabaseConfig;
   redis: RedisConfig;
   cloudinary: CloudinaryConfig;
+  azure: AzureConfig;
 }
 
 export interface AuthConfig {
