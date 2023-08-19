@@ -1,10 +1,10 @@
 {
-  "name": "Swift CMS",
+  "name": "Swift-CMS",
   "version": "0.0.1",
-  "description": "An API first content management system designed to empower you with swift and seamless website management for your blog",
-  "author": "",
+  "description": "A powerful and intuitive API designed to empower you with swift and seamless content management for your organization's blogs",
+  "author": "Daniel Brai",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
