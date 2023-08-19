@@ -16,7 +16,7 @@ async function bootstrap() {
   const logger = app.get(Logger);
 
   const PORT = configService.get().environment.port;
-  const GLOBAL_ROUTE_PREFIX = '/api/v1';
+  const GLOBAL_ROUTE_PREFIX = 'api/v1';
 
   app.enableCors({
     origin: [`http://localhost:${PORT}`, `http://127.0.0.1:${PORT}`],

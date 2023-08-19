@@ -11,7 +11,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type as validateType } from 'class-transformer';
-import { UserRoles } from '@modules/types';
+import { UserRoles } from '../types/role';
 
 export class UserSignupDto {
   @ApiProperty({

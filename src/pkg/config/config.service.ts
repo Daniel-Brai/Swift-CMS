@@ -91,7 +91,15 @@ export class ConfigService {
             defaultConfig.azure.blob.storage_connection_string,
         },
       },
-    };
+      mailer: {
+        smtp: {
+          host: env.SMTP_HOST! || defaultConfig.mailer.smtp.host,
+          port: Number(env.SMTP_PORT!) || defaultConfig.mailer.smtp.port,
+          address: env.SMTP_ADDRESS! || defaultConfig.mailer.smtp.address,
+          password: env.SMTP_PASSWORD! || defaultConfig.mailer.smtp.password,
+        },
+      },
+    }; 
   }
 
   private parseAuthenticationConfig(

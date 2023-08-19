@@ -12,7 +12,10 @@
     "baseUrl": "./",
     "paths": {
       "@pkg/logger": ["src/pkg/logger"],
+      "@pkg/cloudinary": ["src/pkg/cloudinary"],
       "@pkg/config": ["src/pkg/config"],
+      "@pkg/database": ["src/pkg/database"],
+      "@pkg/mailer": ["src/pkg/mailer"],
       "@common/http": ["src/common/http"],
       "@common/interfaces": ["src/common/interfaces"],
       "@common/dtos": ["src/common/dtos"]

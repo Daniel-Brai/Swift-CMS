@@ -182,11 +182,9 @@ export class UserService {
     const password = uuidv4();
     userEntity.email = email;
     userEntity.password = await this.hashPassword(password);
-    const invitedUser = await this.create(userEntity);
+    const invitedUser = await this.userRepository.save(userEntity);
     // TODO: Send email here to the user
-    this.logger.log(
-      `user invitted successfully ${JSON.stringify(invitedUser)}`,
-    );
+    this.logger.log(`user invited successfully ${JSON.stringify(invitedUser)}`);
   }
 
   async deleteUser(id: string) {

@@ -18,7 +18,7 @@ import { GoogleOauthGuard } from '../guards/google-auth.guard';
 import { GithubOauthGuard } from '../guards/github-auth.guard';
 import { Response } from 'express';
 
-@Controller('api/v1/auth')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

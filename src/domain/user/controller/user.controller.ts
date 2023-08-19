@@ -26,9 +26,9 @@ import {
   ApiTags,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
-import { Logger } from '@modules/logger';
-import { CloudinaryService } from '@modules/cloudinary';
-import { UserRoles } from '@modules/types';
+import { Logger } from '@pkg/logger';
+import { CloudinaryService } from '@pkg/cloudinary';
+import { UserRoles } from '../types/role';
 import { AccessTokenGuard } from '../../auth/guards/access-token.guard';
 import { RoleAllowed } from '../../auth/decorators/roles.decorator';
 import { RolesGuard } from '../../auth/guards/role.guard';
@@ -48,10 +48,10 @@ import {
   UNAUTHORIZED_REQUEST,
   BAD_REQUEST,
   INTERNAL_SERVER_ERROR,
-} from '../../../app.consts';
+} from '../../../app.constants';
 
 @ApiBearerAuth('authorization')
-@Controller('api/v1/users')
+@Controller('users')
 @ApiTags('Users')
 export class UserController {
   constructor(

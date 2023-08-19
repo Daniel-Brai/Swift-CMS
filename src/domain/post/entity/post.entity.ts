@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PostImageEntity } from './post-image.entity';
 import { BlogEntity } from '../../blog/entity/blog.entity';
+import { PostImage } from '../types/post-image';
 
 @Entity('posts')
 export class PostEntity extends BaseEntity {
@@ -30,11 +30,8 @@ export class PostEntity extends BaseEntity {
   @JoinColumn({ name: 'blog_name', referencedColumnName: 'name' })
   public blog!: BlogEntity;
 
-  @OneToMany(() => PostImageEntity, (pi: PostImageEntity) => pi.post, {
-    eager: true,
-    cascade: true,
-  })
-  public images: Array<PostImageEntity>;
+  @Column('jsonb', { array: true, default: [] })
+  public images: Array<PostImage>;
 
   @CreateDateColumn({
     type: 'timestamptz',

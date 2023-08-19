@@ -35,6 +35,14 @@ export const DEFAULT_CONFIG: ConfigData = {
         storage_connection_string: '',
       },
     },
+    mailer: {
+      smtp: {
+        host: '',
+        port: 0,
+        address: '',
+        password: '',
+      },
+    },
   },
   authentication: {
     expiresIn: 30000,

@@ -1,4 +1,3 @@
-import { UserEntity } from 'src/domain/user/entity/user.entity';
 import {
   BaseEntity,
   Column,
@@ -11,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { PostEntity } from '../../post/entity/post.entity';
+import { UserEntity } from '../../user/entity/user.entity';
 
 @Entity('blogs')
 export class BlogEntity extends BaseEntity {
@@ -34,7 +34,10 @@ export class BlogEntity extends BaseEntity {
     eager: true,
     cascade: true,
   })
-  public posts!: PostEntity[];
+  public posts!: Array<PostEntity>;
+
+  @Column('jsonb', { array: true, default: [] })
+  public assignees: Array<UserEntity>;
 
   @CreateDateColumn({
     type: 'timestamptz',

@@ -43,11 +43,21 @@ export interface AzureConfig {
   };
 }
 
+export interface MailerConfig {
+  smtp: {
+    host: string;
+    port: number;
+    address: string;
+    password: string;
+  };
+}
+
 export interface ServicesConfig {
   database: DatabaseConfig;
   redis: RedisConfig;
   cloudinary: CloudinaryConfig;
   azure: AzureConfig;
+  mailer: MailerConfig;
 }
 
 export interface AuthConfig {
