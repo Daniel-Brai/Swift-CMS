@@ -32,7 +32,7 @@ export class CreatePostDto {
   @Type(() => Array<PostCategory>)
   @IsOptional()
   public category?: Array<PostCategory>;
-  
+
   @ApiProperty({
     description: 'The image used in the article',
     type: Array<PostImage>,

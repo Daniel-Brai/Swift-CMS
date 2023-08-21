@@ -12,7 +12,7 @@ export class CreateBlogDto {
   @IsString()
   @IsDefined()
   public name!: string;
-  
+
   @ApiProperty({
     description: 'The description of the blog',
     format: 'string',
@@ -21,7 +21,7 @@ export class CreateBlogDto {
   @IsString()
   @IsDefined()
   public description!: string;
-  
+
   @ApiProperty({
     description: 'The url of the image linked to blog',
     format: 'string',
@@ -29,7 +29,7 @@ export class CreateBlogDto {
   })
   @IsString()
   @IsOptional()
-  public image: string
+  public image: string;
 
   @ApiProperty({
     description: 'The name of the blog',
@@ -41,5 +41,3 @@ export class CreateBlogDto {
 }
 
 export class UpdateBlogDto extends PartialType<CreateBlogDto>(CreateBlogDto) {}
-
-

@@ -99,7 +99,7 @@ export class ConfigService {
           password: env.SMTP_PASSWORD! || defaultConfig.mailer.smtp.password,
         },
       },
-    }; 
+    };
   }
 
   private parseAuthenticationConfig(
