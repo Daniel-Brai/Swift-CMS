@@ -37,7 +37,7 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 500, nullable: true })
   public profile_photo_url!: string;
 
-  @OneToMany(() => BlogEntity, (b: BlogEntity) => b.creator, {
+  @OneToMany(() => BlogEntity, (b: BlogEntity) => b.admin, {
     cascade: true,
     eager: true,
   })

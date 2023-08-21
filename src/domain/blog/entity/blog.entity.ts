@@ -19,7 +19,7 @@ export class BlogEntity extends BaseEntity {
 
   @ManyToOne(() => UserEntity, (u: UserEntity) => u.blogs)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  public creator!: UserEntity;
+  public admin!: UserEntity;
 
   @Column({ type: 'varchar', length: 255 })
   public name!: string;
