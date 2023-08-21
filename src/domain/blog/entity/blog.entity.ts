@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { PostEntity } from '../../post/entity/post.entity';
 import { UserEntity } from '../../user/entity/user.entity';
+import { Assignees } from '../types/assignees';
 
 @Entity('blogs')
 export class BlogEntity extends BaseEntity {
@@ -21,23 +22,20 @@ export class BlogEntity extends BaseEntity {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   public admin!: UserEntity;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, unique: true })
   public name!: string;
 
   @Column({ type: 'varchar', length: 500 })
   public description!: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  public blog_image_url!: string;
+  public image!: string;
 
-  @OneToMany(() => PostEntity, (p: PostEntity) => p.blog, {
-    eager: true,
-    cascade: true,
-  })
+  @OneToMany(() => PostEntity, (p: PostEntity) => p.blog)
   public posts!: Array<PostEntity>;
 
   @Column('jsonb', { array: true, default: [] })
-  public assignees: Array<UserEntity>;
+  public assignees: Array<Assignees>;
 
   @CreateDateColumn({
     type: 'timestamptz',

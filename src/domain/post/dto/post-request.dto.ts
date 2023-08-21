@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsArray, IsDefined, IsString, IsOptional } from 'class-validator';
+import { IsDefined, IsString, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PostCategory } from '../types/post-category';
 import { PostComment } from '../types/post-comment';

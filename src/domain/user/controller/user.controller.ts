@@ -97,7 +97,7 @@ export class UserController {
   }
 
   @UseGuards(AccessTokenGuard, RolesGuard)
-  @RoleAllowed(UserRoles['system-admin'])
+  @RoleAllowed(UserRoles['admin'])
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ type: UserSignupResponseDto, description: '' })
   @ApiOperation({ description: 'Find Users based on props ' })
@@ -109,7 +109,7 @@ export class UserController {
   }
 
   @UseGuards(AccessTokenGuard, RolesGuard)
-  @RoleAllowed(UserRoles['system-admin'])
+  @RoleAllowed(UserRoles['admin'])
   @ApiConsumes('application/json')
   @ApiNotFoundResponse({ description: NO_ENTITY_FOUND })
   @ApiForbiddenResponse({ description: UNAUTHORIZED_REQUEST })
@@ -132,7 +132,7 @@ export class UserController {
   }
 
   @UseGuards(AccessTokenGuard, RolesGuard)
-  @RoleAllowed(UserRoles['system-admin'])
+  @RoleAllowed(UserRoles['admin'])
   @ApiConsumes('application/json')
   @ApiNotFoundResponse({ description: NO_ENTITY_FOUND })
   @ApiForbiddenResponse({ description: UNAUTHORIZED_REQUEST })
@@ -152,7 +152,7 @@ export class UserController {
   }
 
   @UseGuards(AccessTokenGuard, RolesGuard)
-  @RoleAllowed(UserRoles['system-admin'])
+  @RoleAllowed(UserRoles['admin'])
   @ApiConsumes('application/json')
   @ApiNotFoundResponse({ description: NO_ENTITY_FOUND })
   @ApiNoContentResponse({ description: '' })
