@@ -74,7 +74,7 @@ export class UpdateUserByIdDto {
 
 export class UpdateUserPermissionBodyDto {
   @ApiProperty({
-    description: 'uuid user_id',
+    description: 'The permission(s) assigned to the user',
     example: '',
     enum: UserRoles,
   })
@@ -131,7 +131,7 @@ export class BothPassword {
   new_password: string;
 }
 
-export class fieldsToUpdateDto extends PartialType(UserSignupDto) {
+export class FieldsToUpdateDto extends PartialType<UserSignupDto>(UserSignupDto) {
   @IsOptional()
   @IsObject()
   @ValidateNested()

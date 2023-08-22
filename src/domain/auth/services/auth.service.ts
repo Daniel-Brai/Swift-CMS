@@ -61,9 +61,9 @@ export class AuthService {
     if (!userData) {
       throw new ForbiddenException();
     }
-    const isMatchFound = await bcrypt.compare(
-      refresh_token,
+    const isMatchFound = await argon2.verify(
       userData.refresh_token,
+      refresh_token,
     );
     if (!isMatchFound) {
       throw new ForbiddenException();
@@ -82,11 +82,11 @@ export class AuthService {
 
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(data, {
-        secret: this.configService.get().auth.access_token_secret,
-        expiresIn: '1d',
+        secret: this.configService.get().authentication.access_token_secret,
+        expiresIn: '2hr',
       }),
       this.jwtService.signAsync(data, {
-        secret: this.configService.get().auth.refresh_token_secret,
+        secret: this.configService.get().authentication.refresh_token_secret,
         expiresIn: '1d',
       }),
     ]);
@@ -120,7 +120,7 @@ export class AuthService {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(data, {
         secret: this.configService.get().authentication.access_token_secret,
-        expiresIn: '1d',
+        expiresIn: '2hr',
       }),
       this.jwtService.signAsync(data, {
         secret: this.configService.get().authentication.refresh_token_secret,

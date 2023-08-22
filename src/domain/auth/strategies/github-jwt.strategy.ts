@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-github';
 import { AuthService } from '../services/auth.service';
-import { ConfigService } from '@modules/config';
+import { ConfigService } from '@pkg/config';
 
 @Injectable()
 export class GithubOauthStrategy extends PassportStrategy(Strategy, 'github') {
@@ -11,9 +11,9 @@ export class GithubOauthStrategy extends PassportStrategy(Strategy, 'github') {
     configService: ConfigService,
   ) {
     super({
-      clientID: `${configService.get().github.oauth_github_id}`,
-      clientSecret: `${configService.get().github.oauth_github_secret}`,
-      callbackURL: `${configService.get().github.oauth_github_callback}`,
+      clientID: `${configService.get().authentication.github.oauth_github_client_id}`,
+      clientSecret: `${configService.get().authentication.github.oauth_github_secret_key}`,
+      callbackURL: `${configService.get().authentication.github.oauth_callback}`,
       scope: ['public_profile'],
     });
   }
