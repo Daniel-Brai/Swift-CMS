@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { ConfigService } from '@modules/config';
+import { ConfigService } from '@pkg/config';
 import { JwtPayload } from 'jsonwebtoken';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
@@ -17,7 +17,7 @@ export class AccessTokenJwtStrategy extends PassportStrategy(Strategy) {
           return data;
         },
       ]),
-      secretOrKey: `${configService.get().auth.access_token_secret}`,
+      secretOrKey: `${configService.get().authentication.access_token_secret}`,
     });
   }
   async validate(payload: JwtPayload) {

@@ -9,7 +9,7 @@ import { Logger } from '@pkg/logger';
 import { Like, Repository } from 'typeorm';
 import * as argon2 from 'argon2';
 import {
-  fieldsToUpdateDto,
+  FieldsToUpdateDto,
   FindUserDto,
   UpdateUserByIdDto,
   UpdateUserPermissionBodyDto,
@@ -35,7 +35,7 @@ export class UserService {
 
   async update(
     email: string,
-    fields: fieldsToUpdateDto,
+    fields: FieldsToUpdateDto,
   ): Promise<UserEntity | undefined> {
     // check what all use is asking to update
     if (fields.email) {
@@ -61,9 +61,9 @@ export class UserService {
         fieldToUpdate.password = fieldToUpdate.password_update.new_password;
       }
     }
-    for (const key in fieldsToUpdateDto) {
+    for (const key in FieldsToUpdateDto) {
       if (typeof fieldToUpdate[key] !== undefined && key !== undefined) {
-        fieldToUpdate[key] = fieldsToUpdateDto[key];
+        fieldToUpdate[key] = FieldsToUpdateDto[key];
       }
     }
     let user: UserEntity | undefined | null;

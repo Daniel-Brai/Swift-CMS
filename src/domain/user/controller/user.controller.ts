@@ -37,7 +37,7 @@ import {
   UpdateUserByIdDto,
   UpdateUserPermissionBodyDto,
   UserSignupDto,
-  fieldsToUpdateDto,
+  FieldsToUpdateDto,
 } from '../dto/user-request.dto';
 import { UserSignupResponseDto } from '../dto/user-response.dto';
 import { UserService } from '../services/user.service';
@@ -86,7 +86,7 @@ export class UserController {
   @UseInterceptors(FileInterceptor('file'))
   @Put('/:id')
   public async UpdateUser(
-    @Body() body: fieldsToUpdateDto,
+    @Body() body: FieldsToUpdateDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
     if (file !== null && file !== undefined) {

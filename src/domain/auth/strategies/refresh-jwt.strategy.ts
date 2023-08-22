@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { ConfigService } from '@modules/config';
+import { ConfigService } from '@pkg/config';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { AuthService } from '../services/auth.service';
 
@@ -23,7 +23,7 @@ export class RefreshTokenJwtStrategy extends PassportStrategy(
           return data;
         },
       ]),
-      secretOrKey: `${configService.get().auth.refresh_token_secret}`,
+      secretOrKey: `${configService.get().authentication.refresh_token_secret}`,
       passReqToCallback: true,
     });
   }
