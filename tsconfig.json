@@ -18,7 +18,8 @@
       "@pkg/mailer": ["src/pkg/mailer"],
       "@common/http": ["src/common/http"],
       "@common/interfaces": ["src/common/interfaces"],
-      "@common/dtos": ["src/common/dtos"]
+      "@common/dtos": ["src/common/dtos"],
+      "@common/types": ["src/common/types"]
     },
     "incremental": true,
     "skipLibCheck": true,
