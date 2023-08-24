@@ -19,6 +19,7 @@
       "@common/http": ["src/common/http"],
       "@common/interfaces": ["src/common/interfaces"],
       "@common/dtos": ["src/common/dtos"],
+      "@common/decorators": ["src/common/decorators"],
       "@common/types": ["src/common/types"]
     },
     "incremental": true,
