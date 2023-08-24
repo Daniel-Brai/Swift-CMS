@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  ClassSerializerInterceptor,
   Delete,
   Get,
   HttpCode,
@@ -12,9 +13,10 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
-  ApiBearerAuth,
+  ApiCookieAuth,
   ApiConsumes,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -50,9 +52,10 @@ import {
   INTERNAL_SERVER_ERROR,
 } from '../../../app.constants';
 
-@ApiBearerAuth('authorization')
-@Controller('users')
+@ApiCookieAuth('access_token')
 @ApiTags('Users')
+@Controller('users')
+@UseInterceptors(new ClassSerializerInterceptor(Reflector))
 export class UserController {
   constructor(
     private readonly userService: UserService,

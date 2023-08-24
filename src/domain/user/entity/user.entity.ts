@@ -54,6 +54,7 @@ export class UserEntity extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP',
     select: true,
   })
+  @Exclude()
   public created_at!: Date;
 
   @UpdateDateColumn({
@@ -61,5 +62,6 @@ export class UserEntity extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP',
     select: true,
   })
+  @Exclude()
   public updated_at!: Date;
 }
