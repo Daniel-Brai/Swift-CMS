@@ -2,12 +2,12 @@ import {
   ConflictException,
   NotFoundException,
   Injectable,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@pkg/config';
 import { Logger } from '@pkg/logger';
 import { Like, Repository } from 'typeorm';
-import * as argon2 from 'argon2';
 import {
   FieldsToUpdateDto,
   FindUserDto,
@@ -17,7 +17,10 @@ import {
 } from '../dto/user-request.dto';
 import { UserEntity } from '../entity/user.entity';
 import { AuthService } from '../../auth/services/auth.service';
+import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { CloudinaryService } from '@pkg/cloudinary';
+import { GenericResponse } from '@common/types';
 
 @Injectable()
 export class UserService {
@@ -25,6 +28,7 @@ export class UserService {
     private readonly logger: Logger,
     private readonly authService: AuthService,
     private configService: ConfigService,
+    private readonly cloudinaryService: CloudinaryService,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
   ) {}
@@ -95,7 +99,7 @@ export class UserService {
   }
 
   hashData(token: string) {
-    return argon2.hash(token, { saltLength: 10 });
+    return bcrypt.hash(token, 10);
   }
 
   async updateRefreshTokenByEmail(email: string, refToken: string) {
@@ -177,6 +181,27 @@ export class UserService {
     }
   }
 
+  async uploadPhoto(
+    file: Express.Multer.File,
+    user: UserEntity,
+  ): Promise<GenericResponse> {
+    const { id } = user;
+    const foundUser = await this.findOneByUserId(id);
+    try {
+      const { secure_url } = await this.cloudinaryService.uploadFile(file);
+      const updatedUser = await this.userRepository.preload({
+        id: foundUser.id,
+        profile_photo: secure_url,
+        ...foundUser,
+      });
+      await this.userRepository.save(updatedUser);
+      return {
+        message: 'Profile photo updated successfully',
+      };
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
   async invite(email: string) {
     const userEntity = this.userRepository.create();
     const password = uuidv4();
@@ -199,7 +224,22 @@ export class UserService {
     }
   }
 
+  async updateUserProfile(user: UserEntity, body: FieldsToUpdateDto) {
+    try {
+      const { id } = user;
+      const foundUser = await this.findOneByUserId(id);
+      const updatedUser = await this.userRepository.preload({
+        id: foundUser.id,
+        ...body,
+      });
+      await this.userRepository.save(updatedUser);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
   async hashPassword(password: string) {
-    return await argon2.hash(password, { saltLength: 10 });
+    return bcrypt.hash(password, 10);
   }
 }
+
