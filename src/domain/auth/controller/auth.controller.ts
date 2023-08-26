@@ -163,4 +163,3 @@ export class AuthController {
     return res.redirect(`/`);
   }
 }
-

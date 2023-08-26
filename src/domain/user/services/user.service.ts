@@ -242,4 +242,3 @@ export class UserService {
     return bcrypt.hash(password, 10);
   }
 }
-

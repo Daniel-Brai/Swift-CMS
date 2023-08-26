@@ -10,9 +10,14 @@ import { AccessTokenJwtStrategy } from './strategies/access-jwt.strategy';
 import { RefreshTokenJwtStrategy } from './strategies/refresh-jwt.strategy';
 import { GoogleOauthStrategy } from './strategies/google-jwt.strategy';
 import { GithubOauthStrategy } from './strategies/github-jwt.strategy';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 6,
+    }),
     LoggerModule,
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt', session: false }),

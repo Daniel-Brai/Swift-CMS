@@ -11,9 +11,15 @@ export class GoogleOauthStrategy extends PassportStrategy(Strategy, 'google') {
     configService: ConfigService,
   ) {
     super({
-      clientID: `${configService.get().authentication.google.oauth_google_client_id}`,
-      clientSecret: `${configService.get().authentication.google.oauth_google_secret_key}`,
-      callbackURL: `${configService.get().authentication.google.oauth_callback}`,
+      clientID: `${
+        configService.get().authentication.google.oauth_google_client_id
+      }`,
+      clientSecret: `${
+        configService.get().authentication.google.oauth_google_secret_key
+      }`,
+      callbackURL: `${
+        configService.get().authentication.google.oauth_callback
+      }`,
       scope: ['email', 'profile'],
     });
   }

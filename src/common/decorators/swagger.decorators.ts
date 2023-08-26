@@ -1,10 +1,8 @@
-import { applyDecorators, Type } from "@nestjs/common";
-import { ApiExtraModels, ApiOkResponse, getSchemaPath } from "@nestjs/swagger";
+import { applyDecorators, Type } from '@nestjs/common';
+import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 import { PageDto } from '@common/dtos';
 
-export const ApiPaginatedResponse = <Model extends Type<any>>(
-  model: Model
-) => {
+export const ApiPaginatedResponse = <Model extends Type<any>>(model: Model) => {
   return applyDecorators(
     ApiExtraModels(PageDto),
     ApiOkResponse({
@@ -15,13 +13,13 @@ export const ApiPaginatedResponse = <Model extends Type<any>>(
           {
             properties: {
               data: {
-                type: "array",
+                type: 'array',
                 items: { $ref: getSchemaPath(model) },
-              }
-            }
-          }
-        ]
-      }
-    })
-  )
-}
+              },
+            },
+          },
+        ],
+      },
+    }),
+  );
+};

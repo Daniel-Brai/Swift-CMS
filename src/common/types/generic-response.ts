@@ -1,4 +1,4 @@
-export type GenericResponse<T> =  {
+export type GenericResponse = {
   readonly message: string;
-  readonly data?: T;
-}
+  readonly data?: any;
+};
