@@ -27,6 +27,7 @@ import { GoogleOauthGuard } from '../guards/google-auth.guard';
 import { GithubOauthGuard } from '../guards/github-auth.guard';
 import { Response } from 'express';
 import {
+  GLOBAL_ROUTE_PREFIX,
   NO_ENTITY_FOUND,
   UNAUTHORIZED_REQUEST,
   BAD_REQUEST,
@@ -34,7 +35,7 @@ import {
 } from '../../../app.constants';
 
 @ApiTags('Authentication')
-@Controller('auth')
+@Controller(`${GLOBAL_ROUTE_PREFIX}/auth`)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

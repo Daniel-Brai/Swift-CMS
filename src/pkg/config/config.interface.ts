@@ -45,11 +45,22 @@ export interface AzureConfig {
 
 export interface MailerConfig {
   smtp: {
+    user: string;
     host: string;
     port: number;
     address: string;
     password: string;
   };
+}
+
+export interface SwaggerConfig {
+  username: string;
+  password: string;
+}
+
+export interface ThrottlerConfig {
+  ttl: number;
+  limit: number;
 }
 
 export interface ServicesConfig {
@@ -58,6 +69,8 @@ export interface ServicesConfig {
   cloudinary: CloudinaryConfig;
   azure: AzureConfig;
   mailer: MailerConfig;
+  swagger: SwaggerConfig;
+  throttler: ThrottlerConfig;
 }
 
 export interface AuthConfig {

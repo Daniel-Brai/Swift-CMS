@@ -2,7 +2,7 @@ import { ConfigData } from './config.interface';
 
 export const DEFAULT_CONFIG: ConfigData = {
   environment: {
-    port: Number(process.env.PORT || 8000),
+    port: Number(process.env.PORT || 3000),
     type: 'production',
   },
   services: {
@@ -37,11 +37,20 @@ export const DEFAULT_CONFIG: ConfigData = {
     },
     mailer: {
       smtp: {
+        user: '',
         host: '',
-        port: 0,
+        port: 5379,
         address: '',
         password: '',
       },
+    },
+    swagger: {
+      username: '',
+      password: '',
+    },
+    throttler: {
+      ttl: 60,
+      limit: 10,
     },
   },
   authentication: {

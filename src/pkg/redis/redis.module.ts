@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { IOREDIS, RedisAsyncModuleOptions } from '@modules/types';
+import { IOREDIS, RedisAsyncModuleOptions } from './redis.constants';
 import IORedis from 'ioredis';
 
 @Module({})

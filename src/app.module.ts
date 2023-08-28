@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { DatabaseModule } from './database/database.module';
-import { ConfigModule } from '@nestjs/config';
+import { TerminusModule } from '@nestjs/terminus';
+import { JwtModule } from '@nestjs/jwt';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@pkg/config';
+import { DomainModule } from './domain/domain.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    AuthModule,
-    UsersModule,
-    DatabaseModule,
-  ],
+  imports: [ConfigModule, JwtModule, DomainModule, TerminusModule, HttpModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

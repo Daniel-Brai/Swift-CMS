@@ -93,11 +93,20 @@ export class ConfigService {
       },
       mailer: {
         smtp: {
+          user: env.SMTP_USER! || defaultConfig.mailer.smtp.user,
           host: env.SMTP_HOST! || defaultConfig.mailer.smtp.host,
           port: Number(env.SMTP_PORT!) || defaultConfig.mailer.smtp.port,
           address: env.SMTP_ADDRESS! || defaultConfig.mailer.smtp.address,
           password: env.SMTP_PASSWORD! || defaultConfig.mailer.smtp.password,
         },
+      },
+      swagger: {
+        username: env.SWAGGER_USERNAME! || defaultConfig.swagger.username,
+        password: env.SWAGGER_PASSWORD! || defaultConfig.swagger.password,
+      },
+      throttler: {
+        ttl: Number(env.THROTTLER_TTL!) || defaultConfig.throttler.ttl,
+        limit: Number(env.THROTTLER_LIMIT!) || defaultConfig.throttler.limit,
       },
     };
   }
@@ -114,14 +123,23 @@ export class ConfigService {
         env.JWT_REFRESH_TOKEN_SECRET! || defaultConfig.refresh_token_secret,
       google: {
         oauth_google_client_id:
-          env.OAUTH_GOOGLE_ID! || defaultConfig.google.oauth_google_client_id,
-        oauth_callback: env.OAUTH_GOOGLE_REDIRECT_URL!,
-        oauth_google_secret_key: env.OAUTH_GOOGLE_SECRET!,
+          env.OAUTH_GOOGLE_CLIENT_ID! ||
+          defaultConfig.google.oauth_google_client_id,
+        oauth_callback:
+          env.OAUTH_CALLBACK_URL! || defaultConfig.google.oauth_callback,
+        oauth_google_secret_key:
+          env.OAUTH_GOOGLE_SECRET_KEY! ||
+          defaultConfig.google.oauth_google_secret_key,
       },
       github: {
-        oauth_github_client_id: env.OAUTH_GITHUB_ID!,
-        oauth_callback: env.OAUTH_GITHUB_REDIRECT_URL!,
-        oauth_github_secret_key: env.OAUTH_GITHUB_SECRET!,
+        oauth_github_client_id:
+          env.OAUTH_GITHUB_CLIENT_ID! ||
+          defaultConfig.github.oauth_github_client_id,
+        oauth_callback:
+          env.OAUTH_CALLBACK_URL! || defaultConfig.github.oauth_callback,
+        oauth_github_secret_key:
+          env.OAUTH_GITHUB_SECRET_KEY! ||
+          defaultConfig.github.oauth_github_secret_key,
       },
     };
   }

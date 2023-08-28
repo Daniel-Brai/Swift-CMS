@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
-import { ConfigService, ConfigModule } from '@modules/config';
-import { RedisModule } from '@modules/cache';
+import { ConfigService, ConfigModule } from '@pkg/config';
+import { RedisModule } from './redis.module';
 
 export const RedisTransportModule = RedisModule.registerAsync({
   imports: [ConfigModule],
@@ -9,8 +9,8 @@ export const RedisTransportModule = RedisModule.registerAsync({
 
     return {
       connectionOptions: {
-        host: `${configService.get().redis.host}`,
-        port: Number(`${configService.get().redis.port}`),
+        host: `${configService.get().services.redis.host}`,
+        port: Number(configService.get().services.redis.port),
       },
       onClientReady: (client) => {
         logger.log('Redis Client initialized...');
