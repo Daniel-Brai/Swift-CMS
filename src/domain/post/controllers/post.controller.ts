@@ -137,8 +137,6 @@ export class PostController {
     return await this.postService.find(query);
   }
 
-  @UseGuards(AccessTokenGuard, RolesGuard)
-  @RoleAllowed(UserRoles['admin'])
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a comment',
