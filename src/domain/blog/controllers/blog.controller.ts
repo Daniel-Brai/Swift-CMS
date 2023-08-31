@@ -142,7 +142,7 @@ export class BlogController {
     description: 'Get action returns the found blog',
   })
   @ApiOkResponse({
-    description: 'Get action returns the found tenant',
+    description: 'Get action returns the found blog',
   })
   @ApiInternalServerErrorResponse({
     description: INTERNAL_SERVER_ERROR,

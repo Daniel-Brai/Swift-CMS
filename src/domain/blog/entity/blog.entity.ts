@@ -31,7 +31,7 @@ export class BlogEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 255, nullable: true })
   public image!: string;
 
-  @OneToMany(() => PostEntity, (p: PostEntity) => p.blog)
+  @OneToMany(() => PostEntity, (p: PostEntity) => p.blog, { nullable: true })
   public posts!: Array<PostEntity>;
 
   @Column('jsonb', { array: true, default: [] })
