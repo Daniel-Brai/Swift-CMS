@@ -131,7 +131,9 @@ export class BothPassword {
   new_password: string;
 }
 
-export class FieldsToUpdateDto extends PartialType<UserSignupDto>(UserSignupDto) {
+export class FieldsToUpdateDto extends PartialType<UserSignupDto>(
+  UserSignupDto,
+) {
   @IsOptional()
   @IsObject()
   @ValidateNested()

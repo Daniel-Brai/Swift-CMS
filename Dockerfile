@@ -8,7 +8,7 @@ COPY package*.json pnpm-lock.yaml ./app/
 
 RUN npm install -g pnpm@8.6.11 && pnpm install
 
-COPY . /journly
+COPY . /swift
 
 EXPOSE 8000
 

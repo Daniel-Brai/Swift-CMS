@@ -1,1 +1,1 @@
-export  * from './swagger.decorators';
+export * from './swagger.decorators';

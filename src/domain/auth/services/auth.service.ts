@@ -9,7 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@pkg/config';
 import { UserService } from '../../user/services/user.service';
 import { UserSignInDto } from '../dto/auth-request.dto';
-import * as argon2 from 'argon2';
+import * as bcrypt from 'bcrypt';
 import { JwtPayload } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from '../../user/entity/user.entity';
@@ -61,9 +61,9 @@ export class AuthService {
     if (!userData) {
       throw new ForbiddenException();
     }
-    const isMatchFound = await argon2.verify(
-      userData.refresh_token,
+    const isMatchFound = await bcrypt.compare(
       refresh_token,
+      userData.refresh_token,
     );
     if (!isMatchFound) {
       throw new ForbiddenException();
@@ -83,11 +83,11 @@ export class AuthService {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(data, {
         secret: this.configService.get().authentication.access_token_secret,
-        expiresIn: '2hr',
+        expiresIn: '45m',
       }),
       this.jwtService.signAsync(data, {
         secret: this.configService.get().authentication.refresh_token_secret,
-        expiresIn: '1d',
+        expiresIn: '2d',
       }),
     ]);
 
@@ -95,8 +95,9 @@ export class AuthService {
       data: {
         userId: data.userId,
         email: data.email,
-        ...data,
+        permissions: data.permissions,
       },
+      sub: data.sub,
       access_token: accessToken,
       refresh_token: refreshToken,
     };
@@ -120,11 +121,11 @@ export class AuthService {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(data, {
         secret: this.configService.get().authentication.access_token_secret,
-        expiresIn: '2hr',
+        expiresIn: '45m',
       }),
       this.jwtService.signAsync(data, {
         secret: this.configService.get().authentication.refresh_token_secret,
-        expiresIn: '1d',
+        expiresIn: '2d',
       }),
     ]);
 
@@ -132,8 +133,8 @@ export class AuthService {
       data: {
         userId: data.userId,
         email: data.email,
-        ...data,
       },
+      sub: data.sub,
       access_token: accessToken,
       refresh_token: refreshToken,
     };
@@ -144,6 +145,6 @@ export class AuthService {
   }
 
   private async comparePassword(enteredPassword: string, dbPassword: string) {
-    return await argon2.verify(dbPassword, enteredPassword);
+    return await bcrypt.compare(enteredPassword, dbPassword);
   }
 }

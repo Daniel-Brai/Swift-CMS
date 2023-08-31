@@ -24,7 +24,7 @@ export class PostEntity extends BaseEntity {
   @Column({ type: 'text' })
   public content: string;
 
-  @ManyToOne(() => BlogEntity, (b: BlogEntity) => b.posts)
+  @ManyToOne(() => BlogEntity, (b: BlogEntity) => b.posts, { nullable: true })
   @JoinColumn({ name: 'blog_name', referencedColumnName: 'name' })
   public blog!: BlogEntity;
 

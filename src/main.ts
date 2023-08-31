@@ -15,6 +15,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const logger = app.get(Logger);
 
+  const APP_ADDRESS = app.getUrl();
   const PORT = configService.get().environment.port;
   const GLOBAL_ROUTE_PREFIX = 'api/v1';
 
@@ -54,8 +55,12 @@ async function bootstrap() {
   });
 
   await app.listen(PORT, () => {
-    logger.log(`[Server]: Server is up and running at port ${PORT}...`);
+    logger.log(
+      `[Server]: Server is up and running at -> ${APP_ADDRESS}:${PORT}`,
+    );
   });
+
+  app.enableShutdownHooks();
 }
 
 bootstrap();

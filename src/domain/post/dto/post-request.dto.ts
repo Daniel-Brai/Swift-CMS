@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsDefined, IsString, IsOptional } from 'class-validator';
+import { IsDefined, IsString, IsOptional, MaxLength } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PostCategory } from '../types/post-category';
 import { PostComment } from '../types/post-comment';
@@ -43,15 +43,26 @@ export class CreatePostDto {
   public images?: Array<PostImage>;
 }
 
-export class UpdataPostDto extends PartialType<CreatePostDto>(CreatePostDto) {}
+export class UpdatePostDto extends PartialType<CreatePostDto>(CreatePostDto) {}
 
 export class AddPostCommentDto {
   @ApiProperty({
+    description: 'The commenter of the blog post',
+    type: String,
+    required: false,
+  })
+  @MaxLength(60)
+  @IsString()
+  @IsOptional()
+  public username: string;
+
+  @ApiProperty({
     description: 'The comment added by the visitor to the blog',
-    type: Array<PostComment>,
+    type: String,
     required: true,
   })
-  @Type(() => Array<PostComment>)
+  @MaxLength(500)
+  @IsString()
   @IsDefined()
-  public comments: Array<PostComment>;
+  public comment: string;
 }
