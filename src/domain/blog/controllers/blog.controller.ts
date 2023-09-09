@@ -50,7 +50,6 @@ import { PageOptionsDto } from '@common/dtos';
 @ApiCookieAuth('access_token')
 @ApiTags('Blogs')
 @Controller('blog')
-@UseInterceptors(new ClassSerializerInterceptor(Reflector))
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
