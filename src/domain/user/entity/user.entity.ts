@@ -19,7 +19,7 @@ export class UserEntity extends BaseEntity {
   public email!: string;
 
   @Column({ type: 'varchar', length: 500 })
-  @Exclude()
+  @Exclude({ toPlainOnly: true })
   public password!: string;
 
   @Column({ type: 'varchar', length: 500, nullable: true })
