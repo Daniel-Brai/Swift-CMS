@@ -53,7 +53,6 @@ import { PageOptionsDto } from '@common/dtos';
 @ApiCookieAuth('access_token')
 @ApiTags('Posts')
 @Controller('post')
-@UseInterceptors(new ClassSerializerInterceptor(Reflector))
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
