@@ -1,6 +1,6 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, ClassSerializerInterceptor } from '@nestjs/common';
 import { ConfigService } from '@pkg/config';
 import { Logger } from '@pkg/logger';
 import { HttpExceptionFilter } from '@common/http';
@@ -24,6 +24,7 @@ async function bootstrap() {
   });
 
   app.setGlobalPrefix(GLOBAL_ROUTE_PREFIX);
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({
