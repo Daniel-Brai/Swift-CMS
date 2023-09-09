@@ -57,7 +57,6 @@ import { Reflector } from '@nestjs/core';
 @ApiCookieAuth('access_token')
 @ApiTags('Users')
 @Controller('users')
-@UseInterceptors(new ClassSerializerInterceptor(Reflector))
 export class UserController {
   constructor(
     private readonly userService: UserService,
