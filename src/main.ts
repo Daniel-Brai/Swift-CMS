@@ -14,8 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
   const logger = app.get(Logger);
-
-  const APP_ADDRESS = await app.getUrl();
+  
   const PORT = configService.get().environment.port;
   const GLOBAL_ROUTE_PREFIX = 'api/v1';
 
@@ -55,9 +54,9 @@ async function bootstrap() {
     next();
   });
 
-  await app.listen(PORT, () => {
+  await app.listen(PORT, async () => {
     logger.log(
-      `[Server]: Server is up and running at -> ${APP_ADDRESS}`,
+      `[Server]: Server is up and running at -> ${await app.getUrl()}`,
     );
   });
 
